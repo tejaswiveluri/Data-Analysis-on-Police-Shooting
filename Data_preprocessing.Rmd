@@ -1,0 +1,63 @@
+---
+title: "AIT-Final Project"
+author: "Naga Tejaswi Veluri"
+date: "01/12/2021"
+output:
+  word_document: default
+  pdf_document: default
+---
+
+```{r}
+
+library(dplyr)
+data=read.csv("D:/study/Gmu/Sem 1/AIT/final/police_shootings.csv")
+
+glimpse(data)
+```
+# This data set does not contain any null va
+```{r}
+is.null(data)
+```
+
+
+# Replace 0 with mean
+
+```{r}
+data[data == 0] <- round(mean(data$Person.Age))                 # Replace 0 with mean
+summary(data)
+
+```
+
+
+```{r}
+data1=data.frame(data)
+head(data1)
+```
+
+# Finding Numeric Data types
+
+```{r}
+continuous=select_if(data1,is.numeric)#just taking numeric vlues
+summary(continuous)
+```
+# Renaming the columns in dataset
+
+```{r}
+names(data1) <- c('Name','Age','Gender','Race','Month','Day','Year','IncidentDate','City','State','Armed','Mental_Illness','ThreatLevel','Fleeing','Manner','BodyCamera')
+
+head(data1)
+```
+
+
+
+
+
+
+
+# Saving the data into CSV file
+
+
+```{r}
+write.csv(data1,"D:/study/Gmu/Sem 1/AIT/final/police_shootings_modifiedset.csv",row.names = TRUE )
+```
+
